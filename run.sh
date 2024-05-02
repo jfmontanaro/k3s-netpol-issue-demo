@@ -10,18 +10,19 @@ echo 'Waiting for cluster to be ready...'
 sleep 30
 echo 'Creating initial resources'
 kubectl apply -f server.yaml -f service.yaml -f client.yaml
-sleep 5
+sleep 10
 
 echo 'Testing connectivity (should succeed at this point)'
 kubectl exec -it pod/client -- wget -O - http://whoami.default.svc.cluster.local
 
 echo 'Creating network policy'
 kubectl apply -f policy.yaml
-sleep 3
+sleep 5
 
 echo 'Recreating server'
 kubectl delete -f server.yaml
 kubectl apply -f server.yaml
+sleep 5
 
 echo 'Testing connectivity (should fail indefinitely)'
 set +e
