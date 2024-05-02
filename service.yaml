@@ -4,8 +4,7 @@ metadata:
   name: whoami
 spec:
   selector:
-    matchLabels:
-      role: server
+    role: server
   ports:
     - port: 80
       name: http

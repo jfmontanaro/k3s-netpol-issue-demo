@@ -1,12 +1,16 @@
+set -e
+
 echo 'Installing K3s...'
 curl -sfL https://get.k3s.io | 
     sh -s - \
     --cluster-cidr=10.42.0.0/16,2001:cafe:42::/56 \
     --service-cidr=10.43.0.0/16,2001:cafe:43::/112
 
-kubectl apply -f server.yaml -f service.yaml -f client.yaml
-echo 'Waiting for things to come up...'
+echo 'Waiting for cluster to be ready...'
 sleep 10
+echo 'Creating initial resources'
+kubectl apply -f server.yaml -f service.yaml -f client.yaml
+sleep 3
 
 echo 'Testing connectivity (should succeed at this point)'
 kubectl exec -it pod/client -- wget -O - http://whoami.default.svc.cluster.local
