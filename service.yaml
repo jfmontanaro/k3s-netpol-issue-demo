@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: whoami
+spec:
+  selector:
+    matchLabels:
+      role: server
+  ports:
+    - port: 80
+      name: http

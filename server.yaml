@@ -1,0 +1,11 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: server
+  namespace: default
+  labels:
+    role: server
+spec:
+  containers:
+    - name: whoami
+      image: traefik/whoami
