@@ -24,6 +24,7 @@ kubectl delete -f server.yaml
 kubectl apply -f server.yaml
 
 echo 'Testing connectivity (should fail indefinitely)'
+set +e
 while true; do
     kubectl exec -it pod/client -- wget -O - http://whoami.default.svc.cluster.local
     sleep 1
